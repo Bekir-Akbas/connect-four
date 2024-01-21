@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="örnek.css">
+    <title>Connect Four</title>
+</head>
+<body>
+    <!-- Add a modal for user input -->
+    <div id="userInputModal" class="modal">
+        <div class="modal-content">
+            <label for="userName">Enter your name:</label>
+            <input type="text" id="userName" required>
+
+            <label for="userColor">Choose your color:</label>
+            <select id="userColor" required>
+                <option value="yellow">Yellow</option>
+                <option value="red">Red</option>
+            </select>
+
+            <button onclick="saveUserInfo()">Save</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Connect Four</h1>
+        <div id="board" class="board"></div>
+        <div id="currentColorIndicator"></div>
+        <div id="result"></div>
+        <button onclick="resetGame()" id="restartButton" style="display: none;">Restart Game</button>
+    </div>
+
+    <script src="örnek.js"></script>
+</body>
+</html>
+;
