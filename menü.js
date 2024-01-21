@@ -16,7 +16,7 @@ function createAccount() {
         document.getElementById("login").style.display = "block";
     }
 }
-
+yeni fonksiyon
 function login() {
     const username = document.getElementById("loginUsername").value;
     const password = document.getElementById("loginPassword").value;
