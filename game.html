@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="game.css">
+    <title>Connect Four</title>
+</head>
+<body>
+    <div id="start-screen" class="start-screen">
+        <h1>Welcome to Connect Four!</h1>
+        <label for="playerName">Enter your name:</label>
+        <input type="text" id="playerName" placeholder="Your Name">
+        <label for="playerColor">Choose your color:</label>
+        <select id="playerColor">
+            <option value="yellow">Yellow</option>
+            <option value="red">Red</option>
+        </select>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <div id="game-screen" class="container" style="display: none;">
+        <h1>Connect Four</h1>
+        <div id="board" class="board"></div>
+        <div id="currentColorIndicator"></div>
+        <div id="result"></div>
+        <button onclick="resetGame()" id="restartButton" style="display: none;">Restart Game</button>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
