@@ -4,6 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="game.css">
+    <!-- game.css -->
+<style>
+    /* Diğer stiller */
+  
+    .falling-animation {
+      animation: fallingAnimation 0.5s ease-out;
+    }
+  
+    @keyframes fallingAnimation {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  
+    .win-animation {
+      animation: winAnimation 0.5s ease-out infinite alternate;
+    }
+  
+    @keyframes winAnimation {
+      from {
+        background-color: #ffd700; /* Yellow */
+        color: #000;
+      }
+      to {
+        background-color: #ff4500; /* Red */
+        color: #fff;
+      }
+    }
+  </style>
+  
     <title>Connect Four</title>
 </head>
 <body>

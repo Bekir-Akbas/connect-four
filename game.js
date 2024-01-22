@@ -11,6 +11,9 @@ function createBoard() {
     }
 }
 
+// game.js
+// ... Diğer fonksiyonlar
+
 function drawBoard() {
     const boardElement = document.getElementById('board');
     boardElement.innerHTML = '';
@@ -23,6 +26,9 @@ function drawBoard() {
             cell.dataset.col = col;
             cell.addEventListener('click', () => makeMove(col));
 
+            const img = document.createElement('img');
+            cell.appendChild(img);
+
             if (board[row][col]) {
                 cell.classList.add(board[row][col]);
             }
@@ -32,7 +38,6 @@ function drawBoard() {
     }
 }
 
-
 function makeMove(column) {
     for (let row = ROWS - 1; row >= 0; row--) {
         if (!board[row][column]) {
@@ -40,6 +45,7 @@ function makeMove(column) {
             drawBoard();
             if (checkWin(row, column)) {
                 alert(`Player ${currentPlayer.name} wins!`);
+                highlightWinningSequence(row, column);
                 resetGame();
             } else if (checkDraw()) {
                 alert('Draw!'); // Berabere durumu
@@ -51,6 +57,26 @@ function makeMove(column) {
         }
     }
 }
+
+
+
+function highlightWinningSequence(row, col) {
+    const winningSequence = getWinningSequence(row, col);
+    for (const { row, col } of winningSequence) {
+        const cell = document.querySelector(`.cell[data-row="${row}"][data-col="${col}"]`);
+        cell.classList.add('win-animation');
+    }
+}
+
+function getWinningSequence(row, col) {
+    // Bu fonksiyon kazanan sırayı döndürmeli, örneğin, şu anki kazanma kontrolünden alabilirsiniz.
+    // Şu an için boş bir dizi döndürüyorum.
+    return [];
+}
+
+
+
+
 
 function checkDraw() {
     for (let col = 0; col < COLUMNS; col++) {
@@ -209,27 +235,6 @@ function updateCurrentPlayerIndicator() {
     indicatorElement.innerHTML = `Current Player: ${currentPlayer.name} (${currentPlayer.color})`;
 }
 
-
-// function customFunction2() {
-//     // İkinci buton için özel işlemleri burada gerçekleştirebilirsiniz.
-//     player1.name = prompt('Enter Player 1 name:');
-//     player1.color = prompt('Choose Player 1 color (yellow or red):');
-
-//     player2.name = prompt('Enter Player 2 name:');
-//     player2.color = player1.color === 'yellow' ? 'red' : 'yellow';
-
-//     if (player1.name && player1.color && player2.name && player2.color) {
-//         document.getElementById('start-screen').style.display = 'none';
-//         document.getElementById('game-screen').style.display = 'block';
-
-//         currentPlayer = player1; // Başlangıçta birinci oyuncu başlar
-//         createBoard();
-//         drawBoard();
-//         updateCurrentPlayerIndicator();
-//     } else {
-//         alert('Please enter names and choose colors for both players.');
-//     }
-// }
 
 
 function customFunction2() {
