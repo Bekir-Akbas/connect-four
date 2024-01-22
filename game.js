@@ -32,6 +32,7 @@ function drawBoard() {
     }
 }
 
+
 function makeMove(column) {
     for (let row = ROWS - 1; row >= 0; row--) {
         if (!board[row][column]) {
@@ -40,6 +41,9 @@ function makeMove(column) {
             if (checkWin(row, column)) {
                 alert(`Player ${currentPlayer.name} wins!`);
                 resetGame();
+            } else if (checkDraw()) {
+                alert('Draw!'); // Berabere durumu
+                resetGame();
             } else {
                 switchPlayer();
             }
@@ -47,6 +51,27 @@ function makeMove(column) {
         }
     }
 }
+
+function checkDraw() {
+    for (let col = 0; col < COLUMNS; col++) {
+        if (!board[0][col]) {
+            return false; // Oyun devam ediyor
+        }
+    }
+    return true; // Oyun berabere
+}
+
+function resetGame() {
+    createBoard();
+    currentPlayer = player1;
+    drawBoard();
+
+    const resultElement = document.getElementById('result');
+    resultElement.innerHTML = ''; // Temizleme
+    const restartButton = document.getElementById('restartButton');
+    restartButton.style.display = 'none'; // restart butonunu gizleme
+}
+
 
 function switchPlayer() {
     currentPlayer = currentPlayer === player1 ? player2 : player1;
@@ -145,12 +170,6 @@ function customFunction2() {
 }
 
 
-
-
-
-
-
-
 let player1 = {
     name: '',
     color: ''
@@ -211,4 +230,5 @@ function customFunction2() {
         alert('Please enter names and choose colors for both players.');
     }
 }
+
 
