@@ -210,13 +210,44 @@ function updateCurrentPlayerIndicator() {
 }
 
 
-function customFunction2() {
-    // İkinci buton için özel işlemleri burada gerçekleştirebilirsiniz.
-    player1.name = prompt('Enter Player 1 name:');
-    player1.color = prompt('Choose Player 1 color (yellow or red):');
+// function customFunction2() {
+//     // İkinci buton için özel işlemleri burada gerçekleştirebilirsiniz.
+//     player1.name = prompt('Enter Player 1 name:');
+//     player1.color = prompt('Choose Player 1 color (yellow or red):');
 
+//     player2.name = prompt('Enter Player 2 name:');
+//     player2.color = player1.color === 'yellow' ? 'red' : 'yellow';
+
+//     if (player1.name && player1.color && player2.name && player2.color) {
+//         document.getElementById('start-screen').style.display = 'none';
+//         document.getElementById('game-screen').style.display = 'block';
+
+//         currentPlayer = player1; // Başlangıçta birinci oyuncu başlar
+//         createBoard();
+//         drawBoard();
+//         updateCurrentPlayerIndicator();
+//     } else {
+//         alert('Please enter names and choose colors for both players.');
+//     }
+// }
+
+
+function customFunction2() {
+    player1.name = prompt('Enter Player 1 name:');
+    
+    let validColors = ['red', 'sarı', 'yellow', 'kırmızı'];
+    let player1Color = prompt(`Choose Player 1 color (${validColors.join('/')}):`).toLowerCase();
+
+    while (!validColors.includes(player1Color)) {
+        player1Color = prompt(`Invalid color! Choose Player 1 color (${validColors.join('/')}):`).toLowerCase();
+    }
+
+    player1Color = (player1Color === 'sarı') ? 'yellow' : player1Color; // Convert 'sarı' to 'yellow'
+    
+    player1.color = player1Color;
+    
     player2.name = prompt('Enter Player 2 name:');
-    player2.color = player1.color === 'yellow' ? 'red' : 'yellow';
+    player2.color = (player1Color === 'yellow') ? 'red' : 'yellow';
 
     if (player1.name && player1.color && player2.name && player2.color) {
         document.getElementById('start-screen').style.display = 'none';
