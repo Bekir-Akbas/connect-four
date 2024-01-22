@@ -1,6 +1,5 @@
 const ROWS = 6;
 const COLUMNS = 7;
-let currentPlayer = 'yellow'; // Starting with yellow
 let board = [];
 
 function createBoard() {
@@ -36,18 +35,24 @@ function drawBoard() {
 function makeMove(column) {
     for (let row = ROWS - 1; row >= 0; row--) {
         if (!board[row][column]) {
-            board[row][column] = currentPlayer;
+            board[row][column] = currentPlayer.color;
             drawBoard();
             if (checkWin(row, column)) {
-                alert(`Player ${currentPlayer === 'yellow' ? 'Yellow' : 'Red'} wins!`);
+                alert(`Player ${currentPlayer.name} wins!`);
                 resetGame();
             } else {
-                currentPlayer = currentPlayer === 'yellow' ? 'red' : 'yellow';
+                switchPlayer();
             }
             return;
         }
     }
 }
+
+function switchPlayer() {
+    currentPlayer = currentPlayer === player1 ? player2 : player1;
+    updateCurrentPlayerIndicator();
+}
+
 
 
 
@@ -129,4 +134,81 @@ function startGame() {
     }
 }
 
+function customFunction1() {
+    alert('Button "Against the Computer" Clicked!');
+    // İlk buton için özel işlemleri burada gerçekleştirebilirsiniz.
+}
+
+function customFunction2() {
+    alert('Button "2 Players" Clicked!');
+    // İkinci buton için özel işlemleri burada gerçekleştirebilirsiniz.
+}
+
+
+
+
+
+
+
+
+let player1 = {
+    name: '',
+    color: ''
+};
+
+let player2 = {
+    name: '',
+    color: ''
+};
+
+let currentPlayer = player1; 
+
+
+function startGame() {
+    player1.name = document.getElementById('playerName').value;
+    player1.color = document.getElementById('playerColor').value;
+
+    player2.name = 'Player 2'; // Varsayılan isim, isteğe bağlı olarak değiştirilebilir
+    player2.color = player1.color === 'yellow' ? 'red' : 'yellow'; // İkinci oyuncunun rengini belirle
+
+    if (player1.name && player1.color) {
+        document.getElementById('start-screen').style.display = 'none';
+        document.getElementById('game-screen').style.display = 'block';
+
+        // İlk oyun tahtasını çiz ve başlangıç oyuncu rengini belirle
+        createBoard();
+        drawBoard();
+        updateCurrentPlayerIndicator();
+
+    } else {
+        alert('Please enter your name and choose a color.');
+    }
+}
+
+function updateCurrentPlayerIndicator() {
+    const indicatorElement = document.getElementById('currentColorIndicator');
+    indicatorElement.innerHTML = `Current Player: ${currentPlayer.name} (${currentPlayer.color})`;
+}
+
+
+function customFunction2() {
+    // İkinci buton için özel işlemleri burada gerçekleştirebilirsiniz.
+    player1.name = prompt('Enter Player 1 name:');
+    player1.color = prompt('Choose Player 1 color (yellow or red):');
+
+    player2.name = prompt('Enter Player 2 name:');
+    player2.color = player1.color === 'yellow' ? 'red' : 'yellow';
+
+    if (player1.name && player1.color && player2.name && player2.color) {
+        document.getElementById('start-screen').style.display = 'none';
+        document.getElementById('game-screen').style.display = 'block';
+
+        currentPlayer = player1; // Başlangıçta birinci oyuncu başlar
+        createBoard();
+        drawBoard();
+        updateCurrentPlayerIndicator();
+    } else {
+        alert('Please enter names and choose colors for both players.');
+    }
+}
 
