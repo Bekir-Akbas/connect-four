@@ -3,42 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="deney.css">
-    <!-- game.css -->
-<style>
-    /* Diğer stiller */
-  
-    .falling-animation {
-      animation: fallingAnimation 0.5s ease-out;
-    }
-  
-    @keyframes fallingAnimation {
-      from {
-        transform: translateY(-100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-  
-    .win-animation {
-      animation: winAnimation 0.5s ease-out infinite alternate;
-    }
-  
-    @keyframes winAnimation {
-      from {
-        background-color: #ffd700; /* Yellow */
-        color: #000;
-      }
-      to {
-        background-color: #ff4500; /* Red */
-        color: #fff;
-      }
-    }
-  </style>
-  
+    <link rel="stylesheet" href="game.css">
     <title>Connect Four</title>
 </head>
 <body>
@@ -52,10 +17,19 @@
             <option value="red">Red</option>
         </select>
         <button onclick="startGame()">Start Game</button>
-        <button onclick="customFunction1()">against the computer</button>
-        <button onclick="customFunction2()">2 players</button>
+        <button onclick="customFunction1()">Against the Computer</button>
+        <button onclick="customFunction2()">2 Players</button>
         <button onclick="showSettingsForm()">Game Settings</button>
+        <button onclick="viewMatchHistory()">View Match History</button> 
     </div>
+
+
+    <div id="match-history-screen" class="container" style="display: none;">
+      <h1>Match History</h1>
+      <!-- Burada match history'nin içeriği yer alabilir -->
+      <button onclick="backToMenu()">Back to Menu</button> <!-- Yeni buton -->
+  </div>
+
 
     <div id="settings-form" class="settings-form" style="display: none;">
         <h2>Game Settings</h2>
@@ -75,6 +49,6 @@
         <button onclick="resetGame()" id="restartButton" style="display: none;">Restart Game</button>
     </div>
 
-    <script src="deney.js"></script>
+    <script src="game.js"></script>
 </body>
 </html>

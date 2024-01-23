@@ -330,3 +330,69 @@ function getRandomValidMove() {
 
     return column;
 }
+
+
+
+// ... (mevcut kodlar)
+
+function viewMatchHistory() {
+    // Match history'yi local storage'dan al
+    const matchHistory = JSON.parse(localStorage.getItem('matchHistory')) || [];
+
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('game-screen').style.display = 'none';
+    document.getElementById('match-history-screen').style.display = 'block';
+
+    displayMatchHistory(matchHistory);
+}
+
+function backToMenu() {
+    document.getElementById('start-screen').style.display = 'flex';
+    document.getElementById('game-screen').style.display = 'none';
+    document.getElementById('match-history-screen').style.display = 'none';
+}
+
+function displayMatchHistory(matchHistory) {
+    const matchHistoryScreen = document.getElementById('match-history-screen');
+    matchHistoryScreen.innerHTML = '<h1>Match History</h1>';
+
+    if (matchHistory.length > 0) {
+        const ul = document.createElement('ul');
+        for (const match of matchHistory) {
+            const li = document.createElement('li');
+            li.textContent = `${match.winner} won against ${match.loser}`;
+            ul.appendChild(li);
+        }
+        matchHistoryScreen.appendChild(ul);
+    } else {
+        const p = document.createElement('p');
+        p.textContent = 'No match history available.';
+        matchHistoryScreen.appendChild(p);
+    }
+}
+
+function updateMatchHistory(winner, loser) {
+    // Match history'yi local storage'dan al
+    let matchHistory = JSON.parse(localStorage.getItem('matchHistory')) || [];
+
+    // En fazla son 5 oyunu sakla
+    matchHistory = matchHistory.slice(0, 4);
+
+    // Kazanan ve kaybeden bilgilerini ekle
+    matchHistory.unshift({ winner, loser });
+
+    // Match history'yi local storage'a kaydet
+    localStorage.setItem('matchHistory', JSON.stringify(matchHistory));
+}
+
+function resetGame() {
+    // ... (mevcut kodlar)
+
+    // Kazanan ve kaybeden bilgilerini match history'ye ekle
+    updateMatchHistory(currentPlayer.name, currentPlayer === player1 ? player2.name : player1.name);
+}
+
+// Initial setup
+createBoard();
+drawBoard();
+
