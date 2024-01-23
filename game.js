@@ -267,4 +267,18 @@ function customFunction2() {
     }
 }
 
+function applySettings() {
+    const backgroundColor = document.getElementById('backgroundColor').value;
+    const gameName = document.getElementById('gameName').value;
 
+    document.body.style.backgroundColor = backgroundColor;
+    document.getElementById('game-screen').getElementsByTagName('h1')[0].innerText = gameName;
+
+    // İstediğiniz diğer stil değişikliklerini burada yapabilirsiniz.
+
+    document.getElementById('settings-form').style.display = 'none';
+}
+
+function showSettingsForm() {
+    document.getElementById('settings-form').style.display = 'block';
+}
