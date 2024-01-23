@@ -39,6 +39,11 @@ function drawBoard() {
 }
 
 function makeMove(column) {
+    if (isAgainstComputer && currentPlayer === player2) {
+        // Bilgisayarın hamlesini yap
+        column = getRandomValidMove();
+    }
+
     for (let row = ROWS - 1; row >= 0; row--) {
         if (!board[row][column]) {
             board[row][column] = currentPlayer.color;
@@ -48,10 +53,14 @@ function makeMove(column) {
                 highlightWinningSequence(row, column);
                 resetGame();
             } else if (checkDraw()) {
-                alert('Draw!'); // Berabere durumu
+                alert('Draw!');
                 resetGame();
             } else {
                 switchPlayer();
+                // Bilgisayarın sırasıysa bir sonraki hamleyi yap
+                if (isAgainstComputer && currentPlayer === player2) {
+                    setTimeout(() => makeMove(getRandomValidMove()), 500); // Yapay zeka için gecikme ekleyebilirsiniz
+                }
             }
             return;
         }
@@ -281,4 +290,43 @@ function applySettings() {
 
 function showSettingsForm() {
     document.getElementById('settings-form').style.display = 'block';
+}
+
+
+
+
+let isAgainstComputer = false; // Yapay zeka ile oynanıp oynanmadığını takip etmek için bir flag
+
+function customFunction1() {
+    isAgainstComputer = true; // Oyunun yapay zekaya karşı oynandığını belirt
+
+    player1.name = document.getElementById('playerName').value;
+    player1.color = document.getElementById('playerColor').value;
+
+    if (player1.name && player1.color) {
+        document.getElementById('start-screen').style.display = 'none';
+        document.getElementById('game-screen').style.display = 'block';
+
+        // Bilgisayarın rengini belirle
+        player2.name = 'Computer';
+        player2.color = player1.color === 'yellow' ? 'red' : 'yellow';
+
+        createBoard();
+        drawBoard();
+        updateCurrentPlayerIndicator();
+
+    } else {
+        alert('Please enter your name and choose a color.');
+    }
+}
+
+
+function getRandomValidMove() {
+    // Rastgele bir sütun seç ve boş olana kadar tekrarla
+    let column;
+    do {
+        column = Math.floor(Math.random() * COLUMNS);
+    } while (board[0][column] !== null);
+
+    return column;
 }
