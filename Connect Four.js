@@ -51,7 +51,7 @@ function drawBoard() {
 
 function makeMove(column) {
     if (isAgainstComputer && currentPlayer === player2) {
-        // Make the computer's move
+
         column = getRandomValidMove();
     }
 
@@ -126,10 +126,10 @@ function switchPlayer() {
 
 function checkWin(row, col) {
     return (
-        checkDirection(row, col, 1, 0) || // Horizontal
-        checkDirection(row, col, 0, 1) || // Vertical
-        checkDirection(row, col, 1, 1) || // Diagonal /
-        checkDirection(row, col, 1, -1)   // Diagonal \
+        checkDirection(row, col, 1, 0) ||
+        checkDirection(row, col, 0, 1) ||
+        checkDirection(row, col, 1, 1) ||
+        checkDirection(row, col, 1, -1)  
     );
 }
 
@@ -320,6 +320,5 @@ function showSettingsForm() {
     document.getElementById('settings-form').style.display = 'block';
 }
 
-// Initial setup
 createBoard();
 drawBoard();

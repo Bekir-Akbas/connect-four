@@ -59,16 +59,12 @@ body {
   background-color: #e0e0e0;
 }
 
-.cell.yellow img {
-  content: url('Yellow_Circle.png');
-  max-width: 50px;
-  max-height: 50px;
+.cell.yellow:before {
+  background-image: radial-gradient(circle at center, yellow 30%, transparent 30%);
 }
 
-.cell.red img {
-  content: url('red\ round.png');
-  max-width: 55px;
-  max-height: 55px;
+.cell.red:before {
+  background-image: radial-gradient(circle at center, red 30%, transparent 30%);
 }
 
 .start-screen {
@@ -163,5 +159,3 @@ body {
 .settings-form button:hover {
   background-color: #e0e0e0;
 }
-
-  
